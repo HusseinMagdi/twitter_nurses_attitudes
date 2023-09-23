@@ -22,8 +22,8 @@ auth.set_access_token(access_token, access_token_secret)
 
 api = tweepy.API(auth, wait_on_rate_limit=True)
 
+# Setting a start date for tweepy to collect tweets (not currently functional due to Twitter restrictions on APIs)
 startDate = datetime.strptime('2023-05-21 00:00:00+0000', '%Y-%m-%d %H:%M:%S%z')
-#endDate = datetime.strptime('2023-05-10 00:00:00+0000', '%Y-%m-%d %H:%M:%S%z')
 
 # Passing the parameters into the Cursor constructor method
 public_tweets = tweepy.Cursor(api.search_tweets,
@@ -33,7 +33,7 @@ public_tweets = tweepy.Cursor(api.search_tweets,
                               lang=language,
                               tweet_mode="extended").items(limit)
 
-# Defining Arrays to save results for each attribute seperatly
+# Defining Arrays to save results for each attribute separately
 user_id_list = []
 tweet_id_list = []
 tweet_text_list = []
@@ -86,7 +86,7 @@ for tweet in public_tweets:
         verified_list.append(tweet.user.verified)
         #time.sleep(0.5)
     
-# Creating a Pandas dataframe to organize the data into a table
+# Creating a Pandas data frame to organize the data into a table
 df = pd.DataFrame({'user_id': user_id_list,
                    'tweet_id': tweet_id_list,
                    'tweet_text': tweet_text_list,
